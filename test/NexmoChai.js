@@ -12,6 +12,14 @@ module.exports = function(chai, utils) {
     this._httpMethod = "POST";
   });
 
+  utils.addProperty(chai.Assertion.prototype, "put", function() {
+    this._httpMethod = "PUT";
+  });
+
+  utils.addProperty(chai.Assertion.prototype, "delete", function() {
+    this._httpMethod = "DELETE";
+  });
+
   utils.addChainableMethod(chai.Assertion.prototype, "method", function(
     method
   ) {
@@ -63,6 +71,7 @@ module.exports = function(chai, utils) {
         }
 
         // Make our assertion
+        // Next up, let's check that the path we called is what we expected
         const path = new chai.Assertion(calledPath);
         path.assert(
           path._obj === url,
